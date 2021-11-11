@@ -1,0 +1,19 @@
+.mainBox {
+  position: absolute;
+  width: 70%;
+  left: 15%;
+  /* 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; */
+
+  /* height: 342px; */
+  /* left: 15%; */
+  /* top: 155px; */
+
+  /* background: #ffffff;
+  border: 1px solid #eaeced;
+  box-sizing: border-box;
+  border-radius: 4px; */
+}

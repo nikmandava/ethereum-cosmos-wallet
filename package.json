@@ -24,6 +24,7 @@
   "dependencies": {
     "@cosmjs/encoding": "^0.26.4",
     "@hanchon/ethermint-address-converter": "^1.1.0",
+    "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",

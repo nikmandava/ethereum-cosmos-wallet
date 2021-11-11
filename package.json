@@ -22,13 +22,17 @@
   },
   "homepage": "https://github.com/nikmandava/ethereum-cosmos-wallet#readme",
   "dependencies": {
+    "@cosmjs/encoding": "^0.26.4",
+    "@hanchon/ethermint-address-converter": "^1.1.0",
     "body-parser": "^1.19.0",
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
-    "web-vitals": "^2.1.2"
+    "request": "^2.88.2",
+    "web-vitals": "^2.1.2",
+    "web3": "^1.6.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

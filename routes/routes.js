@@ -36,7 +36,7 @@ router.get("/ethBalance/:address", (req, res) => {
     if (!error && response.statusCode == 200) {
       console.log(body);
       let weiBalance = JSON.parse(body)["result"];
-      let ethBalance = web3.utils.fromWei(weiBalance, "ether");
+      let ethBalance = Web3.utils.fromWei(weiBalance, "ether");
       res.status(200).json({ amount: ethBalance });
     } else {
       res.status(400).json(response);
@@ -76,14 +76,14 @@ router.get("/ethTransactions", (req, res) => {
   request(options, callback);
 });
 
-router.get("/ethToEthermint/:address", (req, res) => {
+router.get("/ethToEvmos/:address", (req, res) => {
   let address = req.params.address;
   let evmosAddress = converter.ethToEvmos(address);
 
   res.status(200).json({ address: evmosAddress });
 });
 
-router.get("/ethermintToEth/:address", (req, res) => {
+router.get("/evmosToEth/:address", (req, res) => {
   let address = req.params.address;
   let ethAddress = converter.evmosToEth(address);
 
@@ -92,9 +92,11 @@ router.get("/ethermintToEth/:address", (req, res) => {
 
 router.get("/getCosmosCoins/:evmosAddress", (req, res, next) => {
   let evmosAddress = req.params.evmosAddress;
-
   axios
-    .get("http://localhost:1317/cosmos/bank/v1beta1/balances/" + evmosAddress)
+    .get(
+      "http://arsiamons.rpc.evmos.org:1317/cosmos/bank/v1beta1/balances/" +
+        evmosAddress
+    )
     .then((body) => res.status(200).json(body.data.balances))
     .catch((err) => res.status(400).json(err));
 });
@@ -103,6 +105,7 @@ router.get(
   "/getERC20Token/:ethAddress/:tokenAddress",
   async (req, res, next) => {
     try {
+      console.log("YOOOOO WE MADE IT");
       let ethAddress = req.params.ethAddress;
       let tokenAddress = req.params.tokenAddress;
 
@@ -142,6 +145,8 @@ router.get(
         },
       ];
 
+      console.log("YOOOOO WE MADE IT 2");
+
       var web3 = new Web3(
         new Web3.providers.HttpProvider(
           "https://mainnet.infura.io/v3/fe692c00cc5c4400a2c551d02752ec4e"
@@ -158,6 +163,7 @@ router.get(
 
       let tokenSymbol = await contract.methods.symbol().call();
 
+      console.log("YOOOOO WE MADE IT 3");
       res.status(200).json({
         name: tokenName,
         symbol: tokenSymbol,

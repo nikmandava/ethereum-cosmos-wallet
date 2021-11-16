@@ -12,9 +12,30 @@ export default function Login(props) {
 
   async function handleSearch(e) {
     console.log("We are searching for address: " + address);
-    setCookie("address", address);
+
+    if (address.startsWith("evmos1")) {
+      setCookie("evmosAddress", address);
+      getEthAddress(address);
+    } else if (address.startsWith("0x")) {
+      setCookie("ethAddress", address);
+      getEvmosAddress(address);
+    }
+
     navigate("/balance");
   }
+
+  async function getEthAddress(evmosAddress) {
+    axios.get("/api/evmosToEth/" + evmosAddress).then((res) => {
+      setCookie("ethAddress", res.data.address);
+    });
+  }
+
+  async function getEvmosAddress(ethAddress) {
+    axios.get("/api/ethToEvmos/" + ethAddress).then((res) => {
+      setCookie("evmosAddress", res.data.address);
+    });
+  }
+
   return (
     <div className="mainBox">
       <h1> Evmos Wallet </h1>
